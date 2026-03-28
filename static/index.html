@@ -116,10 +116,98 @@
     ::-webkit-scrollbar { width: 6px; }
     ::-webkit-scrollbar-track { background: transparent; }
     ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
+
+    /* ── Settings button ─────────────────────────────────────────────────────── */
+    .settings-btn { margin-left: 8px; background: var(--surface2); border: 1px solid var(--border); border-radius: var(--radius); color: var(--muted); padding: 5px 12px; font-size: 12px; cursor: pointer; transition: all .2s; }
+    .settings-btn:hover { border-color: var(--accent); color: var(--accent); }
+    .settings-btn.active { border-color: var(--accent); color: var(--accent); background: rgba(88,166,255,.1); }
+
+    /* ── Source bar (above chat input) ───────────────────────────────────────── */
+    .source-bar  { display: flex; align-items: center; gap: 6px; flex-wrap: wrap; margin-bottom: 8px; min-height: 26px; }
+    .src-label   { font-size: 11px; color: var(--muted); white-space: nowrap; }
+    .src-chip    { display: inline-flex; align-items: center; gap: 5px; padding: 3px 9px 3px 7px; border-radius: 20px; font-size: 11px; font-weight: 600; border: 1px solid var(--border); background: var(--surface2); color: var(--muted); cursor: pointer; transition: all .18s; user-select: none; }
+    .src-chip .src-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--muted); flex-shrink: 0; }
+    .src-chip.on { border-color: var(--accent2); color: var(--accent2); background: rgba(63,185,80,.1); }
+    .src-chip.on .src-dot { background: var(--accent2); }
+
+    /* ── Settings page ───────────────────────────────────────────────────────── */
+    .settings-page { display: none; flex: 1; overflow: hidden; flex-direction: column; }
+    .settings-page.open { display: flex; }
+    .shell.settings-open .body { display: none; }
+
+    .spage-inner  { display: flex; flex: 1; overflow: hidden; }
+    .snav         { width: 200px; background: var(--surface); border-right: 1px solid var(--border); display: flex; flex-direction: column; padding: 16px 0; flex-shrink: 0; }
+    .snav-hd      { padding: 4px 16px 12px; font-size: 11px; font-weight: 700; letter-spacing: .07em; text-transform: uppercase; color: var(--muted); }
+    .snav-btn     { display: flex; align-items: center; gap: 9px; padding: 9px 16px; font-size: 13px; color: var(--muted); background: none; border: none; cursor: pointer; text-align: left; width: 100%; transition: all .15s; border-left: 3px solid transparent; }
+    .snav-btn:hover  { color: var(--text); background: var(--surface2); }
+    .snav-btn.active { color: var(--accent); border-left-color: var(--accent); background: rgba(88,166,255,.07); font-weight: 600; }
+
+    .scontent     { flex: 1; overflow-y: auto; padding: 28px 36px; }
+    .stab         { display: none; max-width: 700px; }
+    .stab.open    { display: block; }
+    .stab-title   { font-size: 18px; font-weight: 700; margin-bottom: 4px; }
+    .stab-sub     { color: var(--muted); font-size: 13px; margin-bottom: 24px; line-height: 1.6; }
+
+    /* ── Settings form elements ──────────────────────────────────────────────── */
+    .s-section         { margin-bottom: 28px; padding-bottom: 24px; border-bottom: 1px solid var(--border); }
+    .s-section:last-child { border-bottom: none; }
+    .s-section-title   { font-size: 12px; font-weight: 700; letter-spacing: .07em; text-transform: uppercase; color: var(--accent); margin-bottom: 14px; }
+    .s-label           { display: block; font-size: 12px; color: var(--muted); margin-bottom: 5px; margin-top: 12px; }
+    .s-label:first-of-type { margin-top: 0; }
+    .s-input           { width: 100%; background: var(--surface2); border: 1px solid var(--border); border-radius: 7px; color: var(--text); padding: 9px 11px; font-size: 13px; font-family: inherit; outline: none; transition: border-color .2s; }
+    .s-input:focus     { border-color: var(--accent); }
+    select.s-input     { cursor: pointer; }
+    .s-row             { display: flex; gap: 8px; align-items: flex-end; }
+    .s-row .s-input    { flex: 1; }
+    .s-btn             { background: var(--surface2); border: 1px solid var(--border); border-radius: 7px; color: var(--muted); padding: 9px 14px; font-size: 12px; cursor: pointer; white-space: nowrap; transition: all .2s; }
+    .s-btn:hover       { border-color: var(--accent); color: var(--accent); }
+    .s-btn.primary     { background: var(--accent); border-color: var(--accent); color: #0d1117; font-weight: 700; }
+    .s-btn.primary:hover { opacity: .88; color: #0d1117; }
+    .s-btn.danger:hover { border-color: var(--warn); color: var(--warn); }
+    .s-hint            { font-size: 11px; color: var(--muted); margin-top: 5px; line-height: 1.5; }
+    .s-hint.ok         { color: var(--accent2); }
+    .s-hint.err        { color: var(--warn); }
+    .s-upload-label    { display: flex; align-items: center; justify-content: center; width: 100%; padding: 14px; border: 2px dashed var(--border); border-radius: 7px; cursor: pointer; font-size: 12px; color: var(--muted); transition: all .2s; text-align: center; }
+    .s-upload-label:hover, .s-upload-label.dragover { border-color: var(--accent); color: var(--accent); background: rgba(88,166,255,.05); }
+    /* toggle switch */
+    .toggle-sw         { position: relative; width: 38px; height: 22px; flex-shrink: 0; }
+    .toggle-sw input   { opacity: 0; width: 0; height: 0; position: absolute; }
+    .toggle-sw .slider { position: absolute; inset: 0; background: var(--border); border-radius: 22px; cursor: pointer; transition: background .2s; }
+    .toggle-sw .slider::before { content: ''; position: absolute; width: 16px; height: 16px; left: 3px; top: 3px; background: var(--text); border-radius: 50%; transition: transform .2s; }
+    .toggle-sw input:checked + .slider { background: var(--accent2); }
+    .toggle-sw input:checked + .slider::before { transform: translateX(16px); }
+    .s-toggle-row      { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 10px 0; border-bottom: 1px solid var(--border); }
+    .s-toggle-row:last-child { border-bottom: none; }
+    .s-toggle-label    { font-size: 13px; }
+    .s-toggle-sub      { font-size: 11px; color: var(--muted); margin-top: 2px; }
+
+    /* ── Database cards ──────────────────────────────────────────────────────── */
+    .db-list           { display: flex; flex-direction: column; gap: 8px; margin-bottom: 4px; }
+    .db-card           { background: var(--surface2); border: 1px solid var(--border); border-radius: var(--radius); padding: 12px 14px; display: flex; align-items: center; gap: 12px; transition: border-color .2s; }
+    .db-card.unreachable { opacity: .55; }
+    .db-card-info      { flex: 1; min-width: 0; }
+    .db-card-name      { font-weight: 600; font-size: 13px; display: flex; align-items: center; gap: 6px; }
+    .db-card-name input { background: transparent; border: none; border-bottom: 1px solid transparent; color: var(--text); font-weight: 600; font-size: 13px; font-family: inherit; outline: none; padding: 0 0 1px; width: 160px; }
+    .db-card-name input:focus { border-bottom-color: var(--accent); }
+    .db-card-path      { font-size: 11px; color: var(--muted); font-family: monospace; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; margin-top: 2px; }
+    .db-card-meta      { font-size: 11px; color: var(--muted); margin-top: 3px; }
+    .db-badge          { font-size: 10px; padding: 1px 6px; border-radius: 8px; border: 1px solid; white-space: nowrap; }
+    .db-badge.ok       { border-color: rgba(63,185,80,.4); color: var(--accent2); background: rgba(63,185,80,.08); }
+    .db-badge.err      { border-color: rgba(247,129,102,.4); color: var(--warn); background: rgba(247,129,102,.08); }
+
+    /* ── Folder list ─────────────────────────────────────────────────────────── */
+    .folder-list       { display: flex; flex-direction: column; gap: 6px; margin-bottom: 4px; }
+    .folder-item       { display: flex; align-items: center; gap: 10px; padding: 9px 12px; background: var(--surface2); border: 1px solid var(--border); border-radius: 7px; font-size: 12px; }
+    .folder-path       { flex: 1; font-family: monospace; color: var(--text); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+    .scan-result-list  { display: flex; flex-direction: column; gap: 5px; margin-top: 10px; }
+    .scan-result-item  { display: flex; align-items: center; gap: 10px; padding: 8px 10px; background: var(--surface2); border: 1px solid var(--border); border-radius: 6px; font-size: 12px; }
+    .scan-result-item .sr-name { flex: 1; font-family: monospace; color: var(--text); }
+    .scan-result-item .sr-meta { color: var(--muted); font-size: 11px; }
+    .scan-result-item.imported .sr-name { color: var(--muted); text-decoration: line-through; }
   </style>
 </head>
 <body>
-<div class="shell">
+<div class="shell" id="shell">
 
   <!-- Top bar -->
   <header class="topbar">
@@ -131,8 +219,10 @@
     <div class="badge">No Real Data Leaves Device</div>
     <div id="statusDot" class="status-dot" title="Checking API…" style="margin-left:12px"></div>
     <span id="statusLabel" style="font-size:12px;color:var(--muted)">Connecting…</span>
+    <button class="settings-btn" id="settingsToggleBtn" onclick="toggleSettings()" title="Settings">⚙ Settings</button>
   </header>
 
+  <!-- ── Chat view ─────────────────────────────────────────────────────────── -->
   <div class="body">
 
     <!-- Sidebar: schema browser -->
@@ -156,7 +246,6 @@
     <!-- Main chat -->
     <main class="main">
       <div class="chat-wrap" id="chatWrap">
-        <!-- Welcome state -->
         <div class="welcome" id="welcome">
           <div style="font-size:48px;margin-bottom:16px">🔮</div>
           <h2>Ask anything about your data</h2>
@@ -173,6 +262,10 @@
 
       <!-- Input bar -->
       <div class="input-bar">
+        <!-- Source selector chips -->
+        <div class="source-bar" id="sourceBar">
+          <span class="src-label">Sources:</span>
+        </div>
         <form class="input-form" id="queryForm" onsubmit="sendQuery(event)">
           <div class="input-wrap">
             <textarea
@@ -196,7 +289,181 @@
     </main>
 
   </div>
-</div>
+
+  <!-- ── Settings page ─────────────────────────────────────────────────────── -->
+  <div class="settings-page" id="settingsPage">
+    <div class="spage-inner">
+
+      <!-- Left nav -->
+      <nav class="snav">
+        <div class="snav-hd">Settings</div>
+        <button class="snav-btn active" data-tab="databases" onclick="switchTab('databases')">🗄 Databases</button>
+        <button class="snav-btn" data-tab="fts"       onclick="switchTab('fts')">🔍 Full-Text Search</button>
+        <button class="snav-btn" data-tab="folders"   onclick="switchTab('folders')">📁 Folders</button>
+        <button class="snav-btn" data-tab="ai"        onclick="switchTab('ai')">🤖 AI Model</button>
+      </nav>
+
+      <!-- Content -->
+      <div class="scontent">
+
+        <!-- ── Databases tab ──────────────────────────────────────────────── -->
+        <div class="stab open" id="stab-databases">
+          <div class="stab-title">Databases</div>
+          <div class="stab-sub">Configure SQLite databases to query. Toggle sources on/off in the chat input bar.</div>
+
+          <div class="s-section">
+            <div class="s-section-title">Configured Databases</div>
+            <div class="db-list" id="dbList"><p style="color:var(--muted);font-size:12px">Loading…</p></div>
+          </div>
+
+          <div class="s-section">
+            <div class="s-section-title">Add by Path</div>
+            <label class="s-label">Database file path</label>
+            <div class="s-row">
+              <input id="sDbPath" class="s-input" type="text" placeholder="/path/to/your.db  or  relative.db" />
+              <button class="s-btn" onclick="sTestDb()">Test</button>
+              <button class="s-btn primary" onclick="sAddDb()">+ Add</button>
+            </div>
+            <div id="sDbHint" class="s-hint"></div>
+            <label class="s-label" style="margin-top:14px">Database display name <span style="font-weight:400">(optional)</span></label>
+            <input id="sDbName" class="s-input" type="text" placeholder="e.g. analytics, crm, logs…" />
+          </div>
+
+          <div class="s-section">
+            <div class="s-section-title">Upload SQLite File</div>
+            <label class="s-upload-label" id="sUploadLabel" ondragover="sDragOver(event)" ondrop="sDrop(event)">
+              <span id="sUploadText">📂 Click or drag & drop a .db / .sqlite file</span>
+              <input id="sDbUpload" type="file" accept=".db,.sqlite,.sqlite3,.s3db" onchange="sUploadDb(this)" style="display:none" />
+            </label>
+            <div id="sUploadHint" class="s-hint"></div>
+          </div>
+
+          <div class="s-section">
+            <div class="s-section-title">Discover in Working Directory</div>
+            <div class="s-row">
+              <button class="s-btn" onclick="sDiscoverDbs()">🔍 Scan working directory</button>
+            </div>
+            <div id="sDiscoverList" class="scan-result-list"></div>
+          </div>
+        </div>
+
+        <!-- ── FTS tab ────────────────────────────────────────────────────── -->
+        <div class="stab" id="stab-fts">
+          <div class="stab-title">Full-Text Search</div>
+          <div class="stab-sub">Connect an external FTS engine so the AI can search document content in addition to structured data.</div>
+
+          <div class="s-section">
+            <div class="s-toggle-row">
+              <div>
+                <div class="s-toggle-label">Enable Full-Text Search</div>
+                <div class="s-toggle-sub">Include FTS results in AI context when querying</div>
+              </div>
+              <label class="toggle-sw">
+                <input type="checkbox" id="ftsEnabled" onchange="ftsSave()" />
+                <span class="slider"></span>
+              </label>
+            </div>
+          </div>
+
+          <div class="s-section">
+            <div class="s-section-title">Connection</div>
+            <label class="s-label">Engine type</label>
+            <select id="ftsType" class="s-input">
+              <option value="elasticsearch">Elasticsearch</option>
+              <option value="opensearch">OpenSearch</option>
+              <option value="typesense">Typesense</option>
+              <option value="meilisearch">Meilisearch</option>
+            </select>
+            <label class="s-label">Host</label>
+            <input id="ftsHost" class="s-input" type="text" placeholder="localhost" />
+            <label class="s-label">Port</label>
+            <input id="ftsPort" class="s-input" type="number" placeholder="9200" />
+            <label class="s-label">Index / collection name</label>
+            <input id="ftsIndex" class="s-input" type="text" placeholder="documents" />
+            <label class="s-label">API key <span style="font-weight:400;color:var(--muted)">(Typesense / Meilisearch)</span></label>
+            <input id="ftsApiKey" class="s-input" type="password" placeholder="leave blank if not required" autocomplete="off" />
+            <div style="margin-top:16px;display:flex;gap:10px;align-items:center">
+              <button class="s-btn primary" onclick="ftsSave()">💾 Save FTS Config</button>
+              <span id="ftsSaveHint" class="s-hint"></span>
+            </div>
+          </div>
+        </div>
+
+        <!-- ── Folders tab ────────────────────────────────────────────────── -->
+        <div class="stab" id="stab-folders">
+          <div class="stab-title">Folders</div>
+          <div class="stab-sub">Add folders that Data Lens will scan for SQLite database files.</div>
+
+          <div class="s-section">
+            <div class="s-section-title">Monitored Folders</div>
+            <div class="folder-list" id="folderList"><p style="color:var(--muted);font-size:12px">No folders added yet.</p></div>
+          </div>
+
+          <div class="s-section">
+            <div class="s-section-title">Add Folder</div>
+            <label class="s-label">Folder path</label>
+            <div class="s-row">
+              <input id="sFolderPath" class="s-input" type="text" placeholder="/Users/you/databases  or  ~/data" />
+              <button class="s-btn primary" onclick="sAddFolder()">+ Add</button>
+            </div>
+            <div id="sFolderHint" class="s-hint"></div>
+          </div>
+
+          <div class="s-section">
+            <div class="s-section-title">Scan All Folders</div>
+            <div class="s-row">
+              <button class="s-btn" onclick="sScanFolders()">🔍 Scan for .db files</button>
+            </div>
+            <div id="sFolderScanList" class="scan-result-list"></div>
+          </div>
+        </div>
+
+        <!-- ── AI tab ─────────────────────────────────────────────────────── -->
+        <div class="stab" id="stab-ai">
+          <div class="stab-title">AI Model</div>
+          <div class="stab-sub">Configure which AI model to use and how many synthetic rows to generate per query.</div>
+
+          <div class="s-section">
+            <div class="s-section-title">OpenAI</div>
+            <label class="s-label">API key</label>
+            <div class="s-row">
+              <input id="aiApiKey" class="s-input" type="password" placeholder="sk-…  (leave blank to keep current)" autocomplete="off" />
+              <button class="s-btn" onclick="aiToggleKey()" id="aiKeyToggle">Show</button>
+            </div>
+            <div id="aiKeyHint" class="s-hint"></div>
+            <label class="s-label" style="margin-top:12px">Model</label>
+            <select id="aiModel" class="s-input">
+              <option value="gpt-4o-mini">gpt-4o-mini  (fast · cheap)</option>
+              <option value="gpt-4o">gpt-4o  (best quality)</option>
+              <option value="gpt-4-turbo">gpt-4-turbo</option>
+              <option value="gpt-3.5-turbo">gpt-3.5-turbo  (legacy)</option>
+              <option value="o1-mini">o1-mini  (reasoning)</option>
+            </select>
+          </div>
+
+          <div class="s-section">
+            <div class="s-section-title">Synthetic Data</div>
+            <label class="s-label">Default rows per table sent to AI <span style="font-weight:400">(1 – 50)</span></label>
+            <div style="display:flex;align-items:center;gap:14px;margin-top:4px">
+              <input id="aiSynRows" class="s-input" type="range" min="1" max="50" value="12"
+                     oninput="document.getElementById('aiSynRowsVal').textContent=this.value"
+                     style="flex:1;accent-color:var(--accent);padding:0;background:transparent;border:none" />
+              <span id="aiSynRowsVal" style="min-width:28px;text-align:right;font-weight:700;font-size:15px">12</span>
+            </div>
+            <p class="s-hint" style="margin-top:6px">More rows = richer AI context but slower responses.</p>
+          </div>
+
+          <div style="display:flex;gap:10px;align-items:center">
+            <button class="s-btn primary" onclick="aiSave()">💾 Save AI Config</button>
+            <span id="aiSaveHint" class="s-hint"></span>
+          </div>
+        </div>
+
+      </div><!-- /scontent -->
+    </div><!-- /spage-inner -->
+  </div><!-- /settings-page -->
+
+</div><!-- /shell -->
 
 <!-- Synthetic preview modal -->
 <div class="modal-bg" id="modalBg" onclick="closeSynthPreview(event)">
@@ -211,10 +478,15 @@
   </div>
 </div>
 
+
 <script>
   const API = '';   // same origin
 
-  // ── Health check ────────────────────────────────────────────────────────────
+  // ── State ─────────────────────────────────────────────────────────────────
+  // Map of db_id → selected (true/false) for the source chips
+  const srcState = {};
+
+  // ── Health check ──────────────────────────────────────────────────────────
   async function checkHealth() {
     try {
       const res  = await fetch(`${API}/health`);
@@ -222,49 +494,78 @@
       const dot  = document.getElementById('statusDot');
       const lbl  = document.getElementById('statusLabel');
       dot.className = 'status-dot ok';
-      lbl.textContent = `Connected · ${data.ai_configured ? data.ai_model : 'AI not configured'}`
-          + ` · ${Object.values(data.tables).reduce((a,b)=>a+b,0)} rows`;
+      const totalRows = Object.values(data.databases || {})
+        .flatMap(d => Object.values(d.tables || {}))
+        .reduce((a, b) => a + b, 0);
+      lbl.textContent = `Connected · ${data.ai_configured ? data.ai_model : 'AI not configured'} · ${totalRows} rows`;
     } catch {
       document.getElementById('statusLabel').textContent = 'Server offline';
     }
   }
 
-  // ── Schema panel ────────────────────────────────────────────────────────────
+  // ── Source chips ──────────────────────────────────────────────────────────
+  async function loadSourceChips() {
+    try {
+      const data = await (await fetch(`${API}/settings/databases`)).json();
+      const bar  = document.getElementById('sourceBar');
+      bar.innerHTML = '<span class="src-label">Sources:</span>';
+      const activeDbs = (data.databases || []).filter(d => d.active);
+      if (!activeDbs.length) {
+        bar.innerHTML += '<span style="font-size:11px;color:var(--muted)">No active databases</span>';
+        return;
+      }
+      for (const db of activeDbs) {
+        if (!(db.id in srcState)) srcState[db.id] = true; // default: selected
+        const chip = document.createElement('span');
+        chip.className = 'src-chip' + (srcState[db.id] ? ' on' : '');
+        chip.dataset.id = db.id;
+        chip.innerHTML = `<span class="src-dot"></span>${escHtml(db.name)}`;
+        chip.onclick = () => {
+          srcState[db.id] = !srcState[db.id];
+          chip.classList.toggle('on', srcState[db.id]);
+        };
+        bar.appendChild(chip);
+      }
+    } catch { /* ignore */ }
+  }
+
+  function getSelectedDbIds() {
+    const ids = Object.entries(srcState).filter(([,v]) => v).map(([k]) => k);
+    return ids.length ? ids.join(',') : null;
+  }
+
+  // ── Schema panel ──────────────────────────────────────────────────────────
   async function loadSchema() {
     try {
       const schema = await (await fetch(`${API}/schema`)).json();
       const panel  = document.getElementById('schemaPanel');
       panel.innerHTML = '';
-
       for (const [tbl, info] of Object.entries(schema)) {
         const card = document.createElement('div');
         card.className = 'table-card';
-
         const hd = document.createElement('div');
         hd.className = 'table-card-hd';
-        hd.innerHTML = `<span class="table-name">📄 ${tbl}</span><span class="row-count">${info.row_count} rows</span>`;
+        hd.innerHTML = `<span class="table-name">📄 ${escHtml(tbl)}</span><span class="row-count">${info.row_count} rows</span>`;
         card.appendChild(hd);
-
         const cols = document.createElement('div');
         cols.className = 'col-list';
         cols.innerHTML = info.columns.map(c =>
-          `<div class="col-item"><span class="cn">${c.name}</span><span class="ct">${c.type}</span></div>`
+          `<div class="col-item"><span class="cn">${escHtml(c.name)}</span><span class="ct">${escHtml(c.type)}</span></div>`
         ).join('');
         card.appendChild(cols);
-
         hd.onclick = () => cols.classList.toggle('open');
         panel.appendChild(card);
       }
-    } catch (e) {
+    } catch {
       document.getElementById('schemaPanel').innerHTML =
-        '<p style="padding:16px;color:var(--warn);font-size:12px">Could not load schema. Is the server running?</p>';
+        '<p style="padding:16px;color:var(--warn);font-size:12px">Could not load schema.</p>';
     }
   }
 
-  // ── Chat ─────────────────────────────────────────────────────────────────────
+  // ── Chat ──────────────────────────────────────────────────────────────────
   function suggest(btn) {
     document.getElementById('promptInput').value = btn.textContent.trim();
-    document.getElementById('welcome').remove();
+    document.getElementById('welcome')?.remove();
     autoResize(document.getElementById('promptInput'));
     document.getElementById('promptInput').focus();
   }
@@ -281,34 +582,29 @@
     el.style.height = Math.min(el.scrollHeight, 140) + 'px';
   }
 
-  function appendMsg(role, html, meta = null) {
-    const wrap   = document.getElementById('chatWrap');
-    // Remove welcome if still present
-    document.getElementById('welcome')?.remove();
+  function escHtml(s) {
+    return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+  }
 
+  function appendMsg(role, html, meta = null) {
+    const wrap = document.getElementById('chatWrap');
+    document.getElementById('welcome')?.remove();
     const msg    = document.createElement('div');
     msg.className = `msg ${role}`;
-
     const avatar = document.createElement('div');
     avatar.className = 'avatar';
     avatar.textContent = role === 'user' ? '🧑' : '🔮';
-
     const right  = document.createElement('div');
-
     const bubble = document.createElement('div');
     bubble.className = 'bubble';
     bubble.innerHTML = html;
     right.appendChild(bubble);
-
     if (meta) {
       const m = document.createElement('div');
-      m.className = 'meta';
-      m.innerHTML = meta;
+      m.className = 'meta'; m.innerHTML = meta;
       right.appendChild(m);
     }
-
-    msg.appendChild(avatar);
-    msg.appendChild(right);
+    msg.appendChild(avatar); msg.appendChild(right);
     wrap.appendChild(msg);
     wrap.scrollTop = wrap.scrollHeight;
     return bubble;
@@ -318,8 +614,7 @@
     const wrap = document.getElementById('chatWrap');
     document.getElementById('welcome')?.remove();
     const msg = document.createElement('div');
-    msg.className = 'msg ai';
-    msg.id = 'thinking';
+    msg.className = 'msg ai'; msg.id = 'thinking';
     msg.innerHTML = `
       <div class="avatar">🔮</div>
       <div class="bubble">
@@ -330,22 +625,15 @@
     wrap.scrollTop = wrap.scrollHeight;
   }
 
-  function removeThinking() {
-    document.getElementById('thinking')?.remove();
-  }
+  function removeThinking() { document.getElementById('thinking')?.remove(); }
 
   function renderAIText(text) {
-    // Minimal markdown: code blocks, bold, inline code
     return text
       .replace(/```(\w*)\n?([\s\S]*?)```/g, (_, lang, code) =>
         `<pre><code>${escHtml(code.trim())}</code></pre>`)
       .replace(/`([^`]+)`/g, '<code>$1</code>')
       .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
       .replace(/\n/g, '<br>');
-  }
-
-  function escHtml(s) {
-    return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
   }
 
   async function sendQuery(e) {
@@ -357,60 +645,416 @@
     if (!prompt) return;
 
     appendMsg('user', escHtml(prompt));
-    input.value = '';
-    autoResize(input);
-    sendBtn.disabled = true;
-    addThinking();
+    input.value = ''; autoResize(input);
+    sendBtn.disabled = true; addThinking();
 
     try {
-      const res  = await fetch(`${API}/query?${new URLSearchParams({ prompt, rows })}`);
+      const params = { prompt, rows };
+      const dbIds  = getSelectedDbIds();
+      if (dbIds) params.db_ids = dbIds;
+      const res  = await fetch(`${API}/query?${new URLSearchParams(params)}`);
       const data = await res.json();
       removeThinking();
-
       if (!res.ok) {
         appendMsg('ai', `<span style="color:var(--warn)">⚠ ${escHtml(data.detail || 'Error')}</span>`);
         return;
       }
-
+      const dbsQueried = (data.databases_queried || []).map(n =>
+        `<span class="meta-pill">${escHtml(n)}</span>`).join('');
       const meta = `
-        <span class="meta-pill privacy-tag">🔒 ${data.privacy_guarantee}</span>
-        <span class="meta-pill">${data.synthetic_rows_per_table} synthetic rows/table</span>
-        <span class="meta-pill">${data.model_used}</span>`;
-
+        <span class="meta-pill privacy-tag">🔒 ${escHtml(data.privacy_guarantee)}</span>
+        ${dbsQueried}
+        <span class="meta-pill">${data.synthetic_rows_per_table} rows/table</span>
+        <span class="meta-pill">${escHtml(data.model_used)}</span>`;
       appendMsg('ai', renderAIText(data.response), meta);
     } catch (err) {
       removeThinking();
       appendMsg('ai', `<span style="color:var(--warn)">⚠ Network error: ${escHtml(err.message)}</span>`);
     } finally {
-      sendBtn.disabled = false;
-      input.focus();
+      sendBtn.disabled = false; input.focus();
     }
   }
 
-  // ── Synthetic preview modal ─────────────────────────────────────────────────
+  // ── Synthetic preview modal ────────────────────────────────────────────────
   async function openSynthPreview() {
     document.getElementById('modalBg').classList.add('open');
     document.getElementById('modalBody').innerHTML = '<p style="color:var(--muted)">Loading…</p>';
     try {
-      const rows = document.getElementById('rowsInput').value || 5;
-      const data = await (await fetch(`${API}/synthetic?rows=${rows}`)).json();
-      document.getElementById('modalBody').innerHTML =
-        `<pre>${escHtml(JSON.stringify(data, null, 2))}</pre>`;
+      const rows  = document.getElementById('rowsInput').value || 5;
+      const dbIds = getSelectedDbIds();
+      const qs    = new URLSearchParams({ rows });
+      if (dbIds) qs.set('db_ids', dbIds);
+      const data = await (await fetch(`${API}/synthetic?${qs}`)).json();
+      document.getElementById('modalBody').innerHTML = `<pre>${escHtml(JSON.stringify(data, null, 2))}</pre>`;
     } catch {
-      document.getElementById('modalBody').innerHTML =
-        '<p style="color:var(--warn)">Failed to load synthetic data.</p>';
+      document.getElementById('modalBody').innerHTML = '<p style="color:var(--warn)">Failed to load.</p>';
     }
   }
 
   function closeSynthPreview(e) {
-    if (!e || e.target === document.getElementById('modalBg') || !e.target.closest('.modal')) {
+    if (!e || e.target === document.getElementById('modalBg') || !e.target.closest('.modal'))
       document.getElementById('modalBg').classList.remove('open');
+  }
+
+  // ── Settings page toggle ───────────────────────────────────────────────────
+  async function toggleSettings() {
+    const shell = document.getElementById('shell');
+    const page  = document.getElementById('settingsPage');
+    const btn   = document.getElementById('settingsToggleBtn');
+    const isOpen = page.classList.contains('open');
+    if (isOpen) {
+      page.classList.remove('open');
+      shell.classList.remove('settings-open');
+      btn.classList.remove('active');
+      btn.textContent = '⚙ Settings';
+    } else {
+      page.classList.add('open');
+      shell.classList.add('settings-open');
+      btn.classList.add('active');
+      btn.textContent = '✕ Close Settings';
+      await loadSettingsPage();
     }
   }
 
-  // ── Init ─────────────────────────────────────────────────────────────────────
+  function switchTab(name) {
+    document.querySelectorAll('.stab').forEach(t => t.classList.remove('open'));
+    document.querySelectorAll('.snav-btn').forEach(b => b.classList.remove('active'));
+    document.getElementById(`stab-${name}`).classList.add('open');
+    document.querySelector(`.snav-btn[data-tab="${name}"]`).classList.add('active');
+  }
+
+  async function loadSettingsPage() {
+    await Promise.all([loadDbList(), loadFtsForm(), loadFolderList(), loadAiForm()]);
+  }
+
+  // ── Databases tab ──────────────────────────────────────────────────────────
+  async function loadDbList() {
+    const list = document.getElementById('dbList');
+    list.innerHTML = '<p style="color:var(--muted);font-size:12px">Loading…</p>';
+    try {
+      const data = await (await fetch(`${API}/settings/databases`)).json();
+      if (!data.databases.length) {
+        list.innerHTML = '<p style="color:var(--muted);font-size:12px">No databases configured yet.</p>';
+        return;
+      }
+      list.innerHTML = '';
+      for (const db of data.databases) {
+        list.appendChild(makeDbCard(db));
+      }
+    } catch { list.innerHTML = '<p style="color:var(--warn);font-size:12px">Failed to load databases.</p>'; }
+  }
+
+  function makeDbCard(db) {
+    const card = document.createElement('div');
+    card.className = 'db-card' + (db.reachable === false ? ' unreachable' : '');
+    card.dataset.id = db.id;
+    card.innerHTML = `
+      <label class="toggle-sw" title="${db.active ? 'Active' : 'Inactive'}">
+        <input type="checkbox" ${db.active ? 'checked' : ''} onchange="sToggleDb('${db.id}', this.checked)" />
+        <span class="slider"></span>
+      </label>
+      <div class="db-card-info">
+        <div class="db-card-name">
+          <input type="text" value="${escHtml(db.name)}" onblur="sRenameDb('${db.id}', this.value)" title="Click to rename" />
+          <span class="db-badge ${db.reachable !== false ? 'ok' : 'err'}">${db.reachable !== false ? '● connected' : '✕ unreachable'}</span>
+        </div>
+        <div class="db-card-path" title="${escHtml(db.path)}">${escHtml(db.path)}</div>
+        <div class="db-card-meta">${db.table_count != null ? db.table_count + ' tables' : ''} ${db.row_count != null ? '· ' + db.row_count.toLocaleString() + ' rows' : ''}</div>
+      </div>
+      <button class="s-btn danger" onclick="sDeleteDb('${db.id}')" title="Remove">🗑</button>`;
+    return card;
+  }
+
+  async function sToggleDb(id, active) {
+    await fetch(`${API}/settings/databases/${id}`, {
+      method: 'PATCH', headers: {'Content-Type':'application/json'},
+      body: JSON.stringify({ active })
+    });
+    await loadSourceChips(); await loadSchema(); await checkHealth();
+  }
+
+  async function sRenameDb(id, name) {
+    if (!name.trim()) return;
+    await fetch(`${API}/settings/databases/${id}`, {
+      method: 'PATCH', headers: {'Content-Type':'application/json'},
+      body: JSON.stringify({ name: name.trim() })
+    });
+    await loadSourceChips();
+  }
+
+  async function sDeleteDb(id) {
+    if (!confirm('Remove this database from the list? The file will NOT be deleted.')) return;
+    await fetch(`${API}/settings/databases/${id}`, { method: 'DELETE' });
+    delete srcState[id];
+    await loadDbList(); await loadSourceChips(); await loadSchema(); await checkHealth();
+  }
+
+  async function sTestDb() {
+    const path = document.getElementById('sDbPath').value.trim();
+    const hint = document.getElementById('sDbHint');
+    if (!path) { hint.textContent = 'Enter a path first.'; hint.className = 's-hint err'; return; }
+    hint.textContent = 'Testing…'; hint.className = 's-hint';
+    try {
+      const res  = await fetch(`${API}/db/test?path=${encodeURIComponent(path)}`);
+      const data = await res.json();
+      if (res.ok) {
+        const tbls = Object.entries(data.tables).map(([t,n])=>`${t}(${n})`).join(', ') || 'no tables';
+        hint.textContent = `✅ Connected · ${tbls}`; hint.className = 's-hint ok';
+      } else {
+        hint.textContent = '⚠ ' + data.detail; hint.className = 's-hint err';
+      }
+    } catch (e) { hint.textContent = '⚠ ' + e.message; hint.className = 's-hint err'; }
+  }
+
+  async function sAddDb() {
+    const path = document.getElementById('sDbPath').value.trim();
+    const name = document.getElementById('sDbName').value.trim();
+    const hint = document.getElementById('sDbHint');
+    if (!path) { hint.textContent = 'Enter a path first.'; hint.className = 's-hint err'; return; }
+    hint.textContent = 'Adding…'; hint.className = 's-hint';
+    try {
+      const res  = await fetch(`${API}/settings/databases`, {
+        method: 'POST', headers: {'Content-Type':'application/json'},
+        body: JSON.stringify({ path, name: name || undefined })
+      });
+      const data = await res.json();
+      if (res.ok) {
+        hint.textContent = `✅ Added "${data.database.name}"`; hint.className = 's-hint ok';
+        document.getElementById('sDbPath').value = '';
+        document.getElementById('sDbName').value = '';
+        await loadDbList(); await loadSourceChips(); await loadSchema(); await checkHealth();
+      } else {
+        hint.textContent = '⚠ ' + data.detail; hint.className = 's-hint err';
+      }
+    } catch (e) { hint.textContent = '⚠ ' + e.message; hint.className = 's-hint err'; }
+  }
+
+  async function sUploadDb(input) {
+    const hint  = document.getElementById('sUploadHint');
+    const label = document.getElementById('sUploadText');
+    if (!input.files.length) return;
+    const file = input.files[0];
+    label.textContent = `Uploading ${file.name}…`;
+    hint.textContent = ''; hint.className = 's-hint';
+    const fd = new FormData(); fd.append('file', file);
+    try {
+      const res  = await fetch(`${API}/db/upload`, { method: 'POST', body: fd });
+      const data = await res.json();
+      if (res.ok) {
+        hint.textContent = `✅ ${data.message}`; hint.className = 's-hint ok';
+        label.textContent = '📂 Click or drag & drop a .db / .sqlite file';
+        await loadDbList(); await loadSourceChips(); await loadSchema(); await checkHealth();
+      } else {
+        hint.textContent = '⚠ ' + data.detail; hint.className = 's-hint err';
+        label.textContent = '📂 Click or drag & drop a .db / .sqlite file';
+      }
+    } catch (e) {
+      hint.textContent = '⚠ Upload failed: ' + e.message; hint.className = 's-hint err';
+      label.textContent = '📂 Click or drag & drop a .db / .sqlite file';
+    }
+    input.value = '';
+  }
+
+  function sDragOver(e) { e.preventDefault(); document.getElementById('sUploadLabel').classList.add('dragover'); }
+  function sDrop(e) {
+    e.preventDefault();
+    document.getElementById('sUploadLabel').classList.remove('dragover');
+    const file = e.dataTransfer.files[0];
+    if (!file) return;
+    const inp = document.getElementById('sDbUpload');
+    const dt = new DataTransfer(); dt.items.add(file); inp.files = dt.files;
+    sUploadDb(inp);
+  }
+
+  async function sDiscoverDbs() {
+    const list = document.getElementById('sDiscoverList');
+    list.innerHTML = '<p style="color:var(--muted);font-size:12px">Scanning…</p>';
+    try {
+      const data = await (await fetch(`${API}/db/discover`)).json();
+      if (!data.databases.length) {
+        list.innerHTML = `<p style="color:var(--muted);font-size:12px">No .db files found in <code>${escHtml(data.cwd)}</code></p>`;
+        return;
+      }
+      list.innerHTML = '';
+      for (const db of data.databases) {
+        const item = document.createElement('div');
+        item.className = 'scan-result-item';
+        item.innerHTML = `
+          <span class="sr-name">${escHtml(db.path)}</span>
+          <span class="sr-meta">${db.table_count}t · ${db.size_kb}KB</span>
+          <button class="s-btn" style="padding:4px 10px;font-size:11px" onclick="sAddDbFromPath('${escHtml(db.path)}')">+ Add</button>`;
+        list.appendChild(item);
+      }
+    } catch { list.innerHTML = '<p style="color:var(--warn);font-size:12px">Scan failed.</p>'; }
+  }
+
+  async function sAddDbFromPath(path) {
+    const hint = document.getElementById('sDbHint');
+    document.getElementById('sDbPath').value = path;
+    await sAddDb();
+    await sDiscoverDbs();
+  }
+
+  // ── FTS tab ───────────────────────────────────────────────────────────────
+  async function loadFtsForm() {
+    try {
+      const cfg = await (await fetch(`${API}/settings/fts`)).json();
+      document.getElementById('ftsEnabled').checked = cfg.enabled || false;
+      document.getElementById('ftsHost').value    = cfg.host    || '';
+      document.getElementById('ftsPort').value    = cfg.port    || '';
+      document.getElementById('ftsIndex').value   = cfg.index   || '';
+      document.getElementById('ftsApiKey').value  = '';
+      const sel = document.getElementById('ftsType');
+      for (const o of sel.options) { if (o.value === cfg.type) { o.selected = true; break; } }
+    } catch { /* ignore */ }
+  }
+
+  async function ftsSave() {
+    const hint = document.getElementById('ftsSaveHint');
+    hint.textContent = 'Saving…'; hint.className = 's-hint';
+    const body = {
+      enabled: document.getElementById('ftsEnabled').checked,
+      type:    document.getElementById('ftsType').value,
+      host:    document.getElementById('ftsHost').value.trim() || undefined,
+      port:    parseInt(document.getElementById('ftsPort').value) || undefined,
+      index:   document.getElementById('ftsIndex').value.trim() || undefined,
+    };
+    const ak = document.getElementById('ftsApiKey').value.trim();
+    if (ak) body.api_key = ak;
+    try {
+      const res = await fetch(`${API}/settings/fts`, {
+        method: 'PATCH', headers: {'Content-Type':'application/json'}, body: JSON.stringify(body)
+      });
+      const data = await res.json();
+      if (res.ok) { hint.textContent = '✅ Saved'; hint.className = 's-hint ok'; }
+      else { hint.textContent = '⚠ ' + data.detail; hint.className = 's-hint err'; }
+    } catch (e) { hint.textContent = '⚠ ' + e.message; hint.className = 's-hint err'; }
+  }
+
+  // ── Folders tab ───────────────────────────────────────────────────────────
+  async function loadFolderList() {
+    const list = document.getElementById('folderList');
+    try {
+      const data = await (await fetch(`${API}/settings/folders`)).json();
+      if (!data.folders.length) {
+        list.innerHTML = '<p style="color:var(--muted);font-size:12px">No folders added yet.</p>';
+        return;
+      }
+      list.innerHTML = '';
+      data.folders.forEach((path, idx) => {
+        const item = document.createElement('div');
+        item.className = 'folder-item';
+        item.innerHTML = `
+          <span style="font-size:16px">📁</span>
+          <span class="folder-path" title="${escHtml(path)}">${escHtml(path)}</span>
+          <button class="s-btn danger" onclick="sRemoveFolder(${idx})" title="Remove">🗑</button>`;
+        list.appendChild(item);
+      });
+    } catch { list.innerHTML = '<p style="color:var(--warn);font-size:12px">Failed to load folders.</p>'; }
+  }
+
+  async function sAddFolder() {
+    const path = document.getElementById('sFolderPath').value.trim();
+    const hint = document.getElementById('sFolderHint');
+    if (!path) { hint.textContent = 'Enter a folder path.'; hint.className = 's-hint err'; return; }
+    hint.textContent = 'Adding…'; hint.className = 's-hint';
+    try {
+      const res  = await fetch(`${API}/settings/folders`, {
+        method: 'POST', headers: {'Content-Type':'application/json'}, body: JSON.stringify({ path })
+      });
+      const data = await res.json();
+      if (res.ok) {
+        const found = data.found_dbs.length;
+        hint.textContent = `✅ Added · ${found} .db file${found !== 1 ? 's' : ''} found`; hint.className = 's-hint ok';
+        document.getElementById('sFolderPath').value = '';
+        await loadFolderList();
+      } else {
+        hint.textContent = '⚠ ' + data.detail; hint.className = 's-hint err';
+      }
+    } catch (e) { hint.textContent = '⚠ ' + e.message; hint.className = 's-hint err'; }
+  }
+
+  async function sRemoveFolder(idx) {
+    await fetch(`${API}/settings/folders/${idx}`, { method: 'DELETE' });
+    await loadFolderList();
+  }
+
+  async function sScanFolders() {
+    const list = document.getElementById('sFolderScanList');
+    list.innerHTML = '<p style="color:var(--muted);font-size:12px">Scanning…</p>';
+    try {
+      const data = await (await fetch(`${API}/settings/folders/scan`)).json();
+      if (!data.files.length) {
+        list.innerHTML = '<p style="color:var(--muted);font-size:12px">No .db files found in configured folders.</p>';
+        return;
+      }
+      list.innerHTML = '';
+      for (const f of data.files) {
+        const item = document.createElement('div');
+        item.className = 'scan-result-item' + (f.imported ? ' imported' : '');
+        item.innerHTML = `
+          <span class="sr-name" title="${escHtml(f.path)}">${escHtml(f.name)}.db</span>
+          <span class="sr-meta">${f.size_kb}KB · ${escHtml(f.folder)}</span>
+          ${f.imported
+            ? '<span style="font-size:11px;color:var(--accent2)">✓ added</span>'
+            : `<button class="s-btn" style="padding:4px 10px;font-size:11px" onclick="sAddDbFromPath('${escHtml(f.path)}')">+ Add</button>`}`;
+        list.appendChild(item);
+      }
+    } catch { list.innerHTML = '<p style="color:var(--warn);font-size:12px">Scan failed.</p>'; }
+  }
+
+  // ── AI tab ────────────────────────────────────────────────────────────────
+  async function loadAiForm() {
+    try {
+      const cfg = await (await fetch(`${API}/settings`)).json();
+      document.getElementById('aiApiKey').value  = '';
+      document.getElementById('aiSynRows').value = cfg.synthetic_rows || 12;
+      document.getElementById('aiSynRowsVal').textContent = cfg.synthetic_rows || 12;
+      const sel = document.getElementById('aiModel');
+      for (const o of sel.options) { if (o.value === cfg.openai_model) { o.selected = true; break; } }
+      const hint = document.getElementById('aiKeyHint');
+      hint.textContent = cfg.openai_api_key_set
+        ? `Current key: ${cfg.openai_api_key_hint}` : '⚠ No API key configured';
+      hint.className = 's-hint ' + (cfg.openai_api_key_set ? 'ok' : 'err');
+    } catch { /* ignore */ }
+  }
+
+  async function aiSave() {
+    const hint = document.getElementById('aiSaveHint');
+    hint.textContent = 'Saving…'; hint.className = 's-hint';
+    const body = {
+      openai_model:   document.getElementById('aiModel').value || undefined,
+      synthetic_rows: parseInt(document.getElementById('aiSynRows').value) || undefined,
+    };
+    const key = document.getElementById('aiApiKey').value.trim();
+    if (key) body.openai_api_key = key;
+    // Also sync rowsInput in chat bar
+    if (body.synthetic_rows) document.getElementById('rowsInput').value = body.synthetic_rows;
+    try {
+      const res = await fetch(`${API}/settings/ai`, {
+        method: 'PATCH', headers: {'Content-Type':'application/json'}, body: JSON.stringify(body)
+      });
+      const data = await res.json();
+      if (res.ok) {
+        hint.textContent = '✅ Saved'; hint.className = 's-hint ok';
+        document.getElementById('aiApiKey').value = '';
+        await loadAiForm(); await checkHealth();
+      } else { hint.textContent = '⚠ ' + data.detail; hint.className = 's-hint err'; }
+    } catch (e) { hint.textContent = '⚠ ' + e.message; hint.className = 's-hint err'; }
+  }
+
+  function aiToggleKey() {
+    const inp = document.getElementById('aiApiKey');
+    const btn = document.getElementById('aiKeyToggle');
+    if (inp.type === 'password') { inp.type = 'text'; btn.textContent = 'Hide'; }
+    else { inp.type = 'password'; btn.textContent = 'Show'; }
+  }
+
+  // ── Init ──────────────────────────────────────────────────────────────────
   checkHealth();
   loadSchema();
+  loadSourceChips();
 </script>
 </body>
 </html>
+
